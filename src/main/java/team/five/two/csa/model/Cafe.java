@@ -1,10 +1,20 @@
 package team.five.two.csa.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +28,11 @@ public class Cafe {
     private Long id;
     private String name;
     private String cuisine;
-    //TODO: Min and max price?
+    //TODO: Add rating entity, write it with MapsId, in DTO pass average rating
+    //TODO: User can change their rating for that place
+    //TODO: Add cascade for rating
+    @OneToMany(mappedBy = "cafe")
+    private List<Rating> rating;
     private String city;
     private String address;
     private String phone;
